@@ -1,6 +1,7 @@
 package cn.fuzhizhuang.domain.user.adapter.repository;
 
 import cn.fuzhizhuang.domain.user.model.aggregate.RegisterAggregate;
+import cn.fuzhizhuang.domain.user.model.entity.AccountEntity;
 import cn.fuzhizhuang.domain.user.model.entity.UserEntity;
 
 /**
@@ -38,7 +39,7 @@ public interface UserRepository {
     /**
      * 保存ticket
      *
-     * @param ticket  ticket
+     * @param ticket ticket
      * @param openId openid
      */
     void saveQrCodeTicket(String ticket, String openId);
@@ -49,5 +50,28 @@ public interface UserRepository {
      * @param ticket ticket
      */
     void removeQrCodeTicket(String ticket);
+
+    /**
+     * 根据用户id查询用户
+     *
+     * @param userId 用户id
+     * @return 用户实体
+     */
+    UserEntity queryUserByUserId(String userId);
+
+    /**
+     * 根据用户id查询账户
+     *
+     * @param userId 用户id
+     * @return 账户实体
+     */
+    AccountEntity queryAccountByUserId(String userId);
+
+    /**
+     * 修改用户昵称
+     *
+     * @param userEntity 用户实体
+     */
+    void modifyUsername(UserEntity userEntity);
 
 }

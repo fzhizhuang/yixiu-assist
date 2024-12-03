@@ -82,4 +82,25 @@ public class UserRepositoryImpl implements UserRepository {
         String key = CacheKey.buildKey(CacheKey.WX_TICKET_PREFIX, ticket);
         distributeCache.removeValue(key);
     }
+
+    @Override
+    public UserEntity queryUserByUserId(String userId) {
+        AssertUtil.isNotBlank(userId, "用户id为空");
+        UserPO userPO = userDao.queryUserByUserId(userId);
+        return userConverter.po2UserEntity(userPO);
+    }
+
+    @Override
+    public AccountEntity queryAccountByUserId(String userId) {
+        AssertUtil.isNotBlank(userId, "用户id为空");
+        AccountPO accountPO = accountDao.queryAccountByUserId(userId);
+        return accountConverter.po2AccountEntity(accountPO);
+    }
+
+    @Override
+    public void modifyUsername(UserEntity userEntity) {
+        AssertUtil.notNull(userEntity, "用户实体为空");
+        UserPO userPO = userConverter.userEntity2Po(userEntity);
+        userDao.updateUser(userPO);
+    }
 }

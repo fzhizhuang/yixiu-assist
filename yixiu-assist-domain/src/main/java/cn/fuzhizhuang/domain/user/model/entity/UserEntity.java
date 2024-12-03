@@ -2,12 +2,13 @@ package cn.fuzhizhuang.domain.user.model.entity;
 
 import cn.fuzhizhuang.domain.user.model.valobj.UserRoleVO;
 import cn.fuzhizhuang.domain.user.model.valobj.UserStatusVO;
+import cn.fuzhizhuang.types.utils.AssertUtil;
 import cn.fuzhizhuang.types.utils.IdUtil;
+import cn.hutool.core.util.RandomUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * 用户实体
@@ -37,10 +38,23 @@ public class UserEntity {
      */
     public void register(String email, String openid) {
         this.userId = IdUtil.getIdStr();
-        this.username = RandomStringUtils.random(8, true, true);
+        this.username = RandomUtil.randomString(12);
         this.email = email;
         this.openid = openid;
         this.userRole = UserRoleVO.NORMAL;
         this.userStatus = UserStatusVO.ENABLE;
+    }
+
+    /**
+     * 修改用户昵称
+     *
+     * @param uid      用户ID
+     * @param username 用户昵称
+     */
+    public void modifyUsername(String uid, String username) {
+        AssertUtil.isNotBlank(username, "用户昵称为空");
+        AssertUtil.isNotBlank(uid, "用户ID为空");
+        this.userId = uid;
+        this.username = username;
     }
 }

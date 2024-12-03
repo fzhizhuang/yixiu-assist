@@ -33,6 +33,12 @@ redisson:
   enabled: true
   address: ${redis.host}:${redis.port}
   password: ${redis.password}
+# 多级缓存
+multi:
+  cache:
+    l1-caches:
+      - cache-name: userCache
+        expire: 300 # 缓存过期时间
 # RocketMQ配置
 rocketmq:
   name-server: ${mq.host}:${mq.port}
