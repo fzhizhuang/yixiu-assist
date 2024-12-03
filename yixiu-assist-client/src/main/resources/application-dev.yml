@@ -22,3 +22,18 @@ mq:
     group: yixiu-assist-producer
   consumer:
     group: yixiu-assist-consumer
+
+# mail
+mail:
+  host: smtp.126.com
+  username: xiaozhi1024@126.com
+  password: OHAMYWBOOEYADAPQ
+
+# 微信
+wechat:
+  app-id: wx6fd5d638910f9df4
+  token: yixiu
+  original-id: gh_c29adb257001
+  app-secret: e0e3e20d096e8685be3e7dfdba0d5794
+  template-id: _vaJ0PVvl6EukdCPHLUiNK-caLExwriQFhLX-L3WG9Y
+  template-url: http://127.0.0.1:8081

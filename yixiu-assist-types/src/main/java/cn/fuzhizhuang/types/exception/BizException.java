@@ -1,6 +1,5 @@
 package cn.fuzhizhuang.types.exception;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,7 +8,6 @@ import lombok.Getter;
  * @author Fu.zhizhuang
  */
 @Getter
-@AllArgsConstructor
 public class BizException extends RuntimeException {
 
     private final ErrorCode errorCode;
@@ -17,5 +15,11 @@ public class BizException extends RuntimeException {
 
     public BizException(ErrorCode errorCode) {
         this(errorCode, errorCode.msg());
+    }
+
+    public BizException(ErrorCode errorCode, String msg) {
+        super(msg);
+        this.errorCode = errorCode;
+        this.msg = msg;
     }
 }

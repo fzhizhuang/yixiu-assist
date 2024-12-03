@@ -22,6 +22,12 @@ spring:
       minimum-idle: 5
       connection-test-query: SELECT 1
       connection-timeout: 30000
+  # 邮箱配置
+  mail:
+    host: ${mail.host}
+    username: ${mail.username}
+    password: ${mail.password}
+    default-encoding: UTF-8
 # Redis配置
 redisson:
   enabled: true
@@ -39,6 +45,14 @@ rocketmq:
   consumer:
     group: ${mq.consumer.group}
     pull-batch-size: 10
+# 微信配置
+wx:
+  app-id: ${wechat.app-id}
+  token: ${wechat.token}
+  original-id: ${wechat.original-id}
+  app-secret: ${wechat.app-secret}
+  template-id: ${wechat.template-id}
+  template-url: ${wechat.template-url}
 # MybatisPlus配置
 mybatis-plus:
   # 配置mapper xml文件路径
