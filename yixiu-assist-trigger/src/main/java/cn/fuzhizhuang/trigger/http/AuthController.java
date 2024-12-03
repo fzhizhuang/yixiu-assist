@@ -2,6 +2,7 @@ package cn.fuzhizhuang.trigger.http;
 
 import cn.fuzhizhuang.cases.dto.EmailAuthDTO;
 import cn.fuzhizhuang.cases.dto.PasswordAuthDTO;
+import cn.fuzhizhuang.cases.dto.SendCaptchaDTO;
 import cn.fuzhizhuang.cases.dto.WxAuthDTO;
 import cn.fuzhizhuang.cases.service.AuthService;
 import cn.fuzhizhuang.domain.user.model.entity.QrCodeEntity;
@@ -51,5 +52,12 @@ public class AuthController {
     public Result<String> wxAuth(@RequestBody @Valid WxAuthDTO dto) {
         String token = authService.wxAuth(dto);
         return Result.ok(token);
+    }
+
+    @PostMapping("/sendCaptcha")
+    @Operation(summary = "发送验证码")
+    public Result<Void> sendCaptcha(@RequestBody @Valid SendCaptchaDTO dto) {
+        authService.sendCaptcha(dto);
+        return Result.ok();
     }
 }

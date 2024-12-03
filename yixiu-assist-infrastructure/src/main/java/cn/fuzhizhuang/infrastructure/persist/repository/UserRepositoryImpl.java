@@ -4,7 +4,6 @@ import cn.fuzhizhuang.domain.user.adapter.repository.UserRepository;
 import cn.fuzhizhuang.domain.user.model.aggregate.RegisterAggregate;
 import cn.fuzhizhuang.domain.user.model.entity.AccountEntity;
 import cn.fuzhizhuang.domain.user.model.entity.UserEntity;
-import cn.fuzhizhuang.domain.user.model.valobj.EmailCaptchaVO;
 import cn.fuzhizhuang.infrastructure.persist.converter.AccountConverter;
 import cn.fuzhizhuang.infrastructure.persist.converter.UserConverter;
 import cn.fuzhizhuang.infrastructure.persist.dao.impl.AccountDao;
@@ -46,17 +45,6 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void verifyCaptcha(String email, String captcha, EmailCaptchaVO emailCaptchaVO) {
-        // 构建缓存key
-        String key = CacheKey.buildKey(CacheKey.CAPTCHA_PREFIX, email, emailCaptchaVO.getCode());
-        String cacheCaptcha = distributeCache.getValue(key);
-        AssertUtil.isNotBlank(cacheCaptcha, "验证码不存在或已过期,请重新发送验证码");
-        AssertUtil.isTrue(cacheCaptcha.equals(captcha), "验证码错误,请输入正确的验证码");
-        // 删除验证码
-        distributeCache.removeValue(key);
-    }
-
-    @Override
     public UserEntity register(RegisterAggregate aggregate) {
         AssertUtil.notNull(aggregate, "注册聚合对象不能为空");
         UserEntity userEntity = aggregate.getUserEntity();
@@ -94,5 +82,4 @@ public class UserRepositoryImpl implements UserRepository {
         String key = CacheKey.buildKey(CacheKey.WX_TICKET_PREFIX, ticket);
         distributeCache.removeValue(key);
     }
-
 }

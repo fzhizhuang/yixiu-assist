@@ -23,6 +23,8 @@ public abstract class AbstractAuthStrategy implements AuthDomainService {
     @Resource
     protected UserRepository userRepository;
 
+    public static final long EXPIRE = 5L;
+
     @Override
     public String auth(AuthEntity authEntity) {
         AssertUtil.notNull(authEntity, "认证实体信息为空");
@@ -45,5 +47,6 @@ public abstract class AbstractAuthStrategy implements AuthDomainService {
     }
 
     protected abstract UserEntity register(AuthEntity authEntity);
+
     protected abstract UserEntity login(UserEntity userEntity, AuthEntity authEntity);
 }

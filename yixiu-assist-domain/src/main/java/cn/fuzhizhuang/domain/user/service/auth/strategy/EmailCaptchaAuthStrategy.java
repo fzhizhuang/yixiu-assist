@@ -6,7 +6,9 @@ import cn.fuzhizhuang.domain.user.model.entity.AuthEntity;
 import cn.fuzhizhuang.domain.user.model.entity.UserEntity;
 import cn.fuzhizhuang.domain.user.model.valobj.AuthTypeVO;
 import cn.fuzhizhuang.domain.user.model.valobj.EmailCaptchaVO;
+import cn.fuzhizhuang.domain.user.service.code.CodeService;
 import cn.fuzhizhuang.types.utils.AssertUtil;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,13 +19,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailCaptchaAuthStrategy extends AbstractAuthStrategy {
 
+    @Resource
+    private CodeService codeService;
+
     @Override
     protected UserEntity register(AuthEntity authEntity) {
         String email = authEntity.getAccount();
         String captcha = authEntity.getCaptcha();
         AssertUtil.notNull(email, "邮箱不能为空");
         AssertUtil.notNull(captcha, "验证码不能为空");
-        userRepository.verifyCaptcha(email, captcha, EmailCaptchaVO.AUTH);
+        codeService.verifyCaptcha(email, captcha, EmailCaptchaVO.AUTH);
         // 构建注册聚合对象
         UserEntity userEntity = new UserEntity();
         userEntity.register(email, null);
@@ -38,7 +43,7 @@ public class EmailCaptchaAuthStrategy extends AbstractAuthStrategy {
         String email = authEntity.getAccount();
         String captcha = authEntity.getCaptcha();
         // 校验验证码
-        userRepository.verifyCaptcha(email, captcha, EmailCaptchaVO.AUTH);
+        codeService.verifyCaptcha(email, captcha, EmailCaptchaVO.AUTH);
         return userEntity;
     }
 

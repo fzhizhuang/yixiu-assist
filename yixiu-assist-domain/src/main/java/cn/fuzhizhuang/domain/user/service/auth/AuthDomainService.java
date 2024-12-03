@@ -18,6 +18,7 @@ public interface AuthDomainService {
      */
     String auth(AuthEntity authEntity);
 
+
     /**
      * 获取认证类型
      *

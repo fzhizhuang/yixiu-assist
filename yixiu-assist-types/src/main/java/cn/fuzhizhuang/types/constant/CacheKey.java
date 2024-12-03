@@ -7,11 +7,15 @@ package cn.fuzhizhuang.types.constant;
  */
 public class CacheKey {
 
+    // 验证码前缀
     public static final String CAPTCHA_PREFIX = "captcha:";
 
     // 微信前缀
     public static final String WX_TOKEN_PREFIX = "wx:token:";
     public static final String WX_TICKET_PREFIX = "wx:ticket:";
+
+    // 幂等前缀
+    public static final String IDEMPOTENT = "idempotent:";
 
     /**
      * 构建缓存key

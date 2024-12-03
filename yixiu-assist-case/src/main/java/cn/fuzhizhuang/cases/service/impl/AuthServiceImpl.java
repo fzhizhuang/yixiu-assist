@@ -2,14 +2,17 @@ package cn.fuzhizhuang.cases.service.impl;
 
 import cn.fuzhizhuang.cases.dto.EmailAuthDTO;
 import cn.fuzhizhuang.cases.dto.PasswordAuthDTO;
+import cn.fuzhizhuang.cases.dto.SendCaptchaDTO;
 import cn.fuzhizhuang.cases.dto.WxAuthDTO;
 import cn.fuzhizhuang.cases.service.AuthService;
 import cn.fuzhizhuang.domain.user.model.entity.AuthEntity;
 import cn.fuzhizhuang.domain.user.model.entity.QrCodeEntity;
 import cn.fuzhizhuang.domain.user.model.valobj.AuthTypeVO;
+import cn.fuzhizhuang.domain.user.model.valobj.EmailCaptchaVO;
 import cn.fuzhizhuang.domain.user.service.auth.AuthDomainService;
 import cn.fuzhizhuang.domain.user.service.auth.WxDomainService;
 import cn.fuzhizhuang.domain.user.service.auth.factory.AuthFactory;
+import cn.fuzhizhuang.domain.user.service.code.CodeService;
 import cn.fuzhizhuang.types.utils.AssertUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,7 @@ public class AuthServiceImpl implements AuthService {
 
     private final AuthFactory factory;
     private final WxDomainService wxDomainService;
+    private final CodeService codeService;
 
     @Override
     public String passwordAuth(PasswordAuthDTO dto) {
@@ -73,5 +77,14 @@ public class AuthServiceImpl implements AuthService {
         // 获取认证策略
         AuthDomainService authDomainService = factory.getAuthDomainService(AuthTypeVO.WECHAT.getCode());
         return authDomainService.auth(authEntity);
+    }
+
+    @Override
+    public void sendCaptcha(SendCaptchaDTO dto) {
+        String email = dto.getEmail();
+        String template = dto.getTemplate();
+        EmailCaptchaVO emailCaptcha = EmailCaptchaVO.getEmailCaptcha(template);
+        AssertUtil.notNull(emailCaptcha, "邮件模板不存在");
+        codeService.sendCaptcha(email, template);
     }
 }

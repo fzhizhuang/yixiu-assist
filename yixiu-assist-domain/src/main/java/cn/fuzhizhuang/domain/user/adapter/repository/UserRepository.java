@@ -2,7 +2,6 @@ package cn.fuzhizhuang.domain.user.adapter.repository;
 
 import cn.fuzhizhuang.domain.user.model.aggregate.RegisterAggregate;
 import cn.fuzhizhuang.domain.user.model.entity.UserEntity;
-import cn.fuzhizhuang.domain.user.model.valobj.EmailCaptchaVO;
 
 /**
  * 用户仓储
@@ -19,14 +18,6 @@ public interface UserRepository {
      */
     UserEntity queryUserByEmailOrOpenid(String account);
 
-    /**
-     * 验证邮箱验证码
-     *
-     * @param email      邮箱
-     * @param captcha    验证码
-     * @param emailCaptchaVO 验证码类型
-     */
-    void verifyCaptcha(String email, String captcha, EmailCaptchaVO emailCaptchaVO);
 
     /**
      * 注册用户
@@ -58,4 +49,5 @@ public interface UserRepository {
      * @param ticket ticket
      */
     void removeQrCodeTicket(String ticket);
+
 }
