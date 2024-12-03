@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cn.fuzhizhuang</groupId>
+    <artifactId>yixiu-assist</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>yixiu-assist-types</module>
+        <module>yixiu-assist-domain</module>
+        <module>yixiu-assist-infrastructure</module>
+        <module>yixiu-assist-case</module>
+        <module>yixiu-assist-trigger</module>
+        <module>yixiu-assist-client</module>
+    </modules>
+
+    <properties>
+        <revision>1.0-SNAPSHOT</revision>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 项目相关 -->
+        <spring-boot.version>3.4.0</spring-boot.version>
+        <mysql.version>8.4.0</mysql.version>
+        <mybatis-plus.version>3.5.7</mybatis-plus.version>
+        <fastjson.version>2.0.53</fastjson.version>
+        <redisson.version>1.0.0</redisson.version>
+        <rocketmq.version>2.3.1</rocketmq.version>
+        <mapstruct.version>1.6.2</mapstruct.version>
+        <hutool.version>5.8.32</hutool.version>
+        <knife4j.version>4.5.0</knife4j.version>
+        <common-lang3.version>3.17.0</common-lang3.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!-- 项目依赖 -->
+            <!-- spring boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- mysql -->
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- mybatis plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- redisson plus -->
+            <dependency>
+                <groupId>cn.fuzhizhuang</groupId>
+                <artifactId>redisson-plus-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <!-- rocketmq -->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.version}</version>
+            </dependency>
+            <!-- mapstruct -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <!-- hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!-- knife4j -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- common-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${common-lang3.version}</version>
+            </dependency>
+            <!-- 工程模块 -->
+            <!-- types -->
+            <dependency>
+                <groupId>cn.fuzhizhuang</groupId>
+                <artifactId>yixiu-assist-types</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!-- domain -->
+            <dependency>
+                <groupId>cn.fuzhizhuang</groupId>
+                <artifactId>yixiu-assist-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!-- infrastructure -->
+            <dependency>
+                <groupId>cn.fuzhizhuang</groupId>
+                <artifactId>yixiu-assist-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!-- case -->
+            <dependency>
+                <groupId>cn.fuzhizhuang</groupId>
+                <artifactId>yixiu-assist-case</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!-- trigger -->
+            <dependency>
+                <groupId>cn.fuzhizhuang</groupId>
+                <artifactId>yixiu-assist-trigger</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!-- client -->
+            <dependency>
+                <groupId>cn.fuzhizhuang</groupId>
+                <artifactId>yixiu-assist-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <version>3.2.1</version>
+            </plugin>
+            <!-- 指定构建版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <!-- 构建资源 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- 统一设定POM版本信息插件 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.17.1</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

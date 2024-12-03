@@ -1,0 +1,56 @@
+# 服务端口
+server:
+  port: 8081
+spring:
+  # 应用名称
+  application:
+    name: yixiu-assist
+  # 配置环境
+  profiles:
+    active: dev
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${mysql.host}:${mysql.port}/${mysql.database}?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${mysql.username}
+    password: ${mysql.password}
+    # 连接池配置
+    hikari:
+      pool-name: ${mysql.hikari.pool-name}
+      auto-commit: true
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-test-query: SELECT 1
+      connection-timeout: 30000
+# Redis配置
+redisson:
+  enabled: true
+  address: ${redis.host}:${redis.port}
+  password: ${redis.password}
+# RocketMQ配置
+rocketmq:
+  name-server: ${mq.host}:${mq.port}
+  producer:
+    group: ${mq.producer.group}
+    send-message-timeout: 3000
+    max-message-size: 4096
+    retry-times-when-send-failed: 3
+    retry-times-when-send-async-failed: 2
+  consumer:
+    group: ${mq.consumer.group}
+    pull-batch-size: 10
+# MybatisPlus配置
+mybatis-plus:
+  # 配置mapper xml文件路径
+  mapper-locations: classpath:/mapper/*.xml
+  # 配置自增ID
+  global-config:
+    db-config:
+      id-type: auto
+    # 关闭banner
+    banner: false
+  configuration:
+    # 开启驼峰命名
+    map-underscore-to-camel-case: true
+    # 开启日志打印
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
