@@ -41,4 +41,13 @@ public interface UserDomainService {
      * @return UserEntity
      */
     UserEntity updateUserCache(String uid);
+
+    /**
+     * 修改用户头像
+     *
+     * @param uid      用户ID
+     * @param avatarUrl 新头像地址
+     */
+    void modifyAvatar(String uid, String avatarUrl);
+
 }

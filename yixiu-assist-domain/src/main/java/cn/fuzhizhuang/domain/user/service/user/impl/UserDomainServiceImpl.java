@@ -21,7 +21,7 @@ public class UserDomainServiceImpl implements UserDomainService {
     private final UserRepository userRepository;
 
     @Override
-    @MultiCache(cacheName = "userCache", prefix = "userInfo", keys = {"#userId"})
+    @MultiCache(cacheName = "userCache", prefix = "userInfo:", keys = {"#userId"})
     public UserEntity queryUserByUserId(String userId) {
         return userRepository.queryUserByUserId(userId);
     }
@@ -39,8 +39,15 @@ public class UserDomainServiceImpl implements UserDomainService {
     }
 
     @Override
-    @MultiCachePut(cacheName = "userCache", prefix = "userInfo", keys = {"#uid"})
+    @MultiCachePut(cacheName = "userCache", prefix = "userInfo:", keys = {"#uid"})
     public UserEntity updateUserCache(String uid) {
         return userRepository.queryUserByUserId(uid);
+    }
+
+    @Override
+    public void modifyAvatar(String uid, String avatarUrl) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.modifyAvatar(uid, avatarUrl);
+        userRepository.modifyAvatar(userEntity);
     }
 }

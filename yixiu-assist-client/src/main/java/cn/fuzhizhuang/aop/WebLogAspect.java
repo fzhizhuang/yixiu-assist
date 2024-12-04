@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
 
@@ -45,7 +46,14 @@ public class WebLogAspect {
             // 打印请求的 IP
             log.info("IP             : {}", request.getRemoteAddr());
             // 打印请求入参
-            log.info("Request Args   : {}", JSON.toJSONString(joinPoint.getArgs()));
+            String requestArgs;
+            if (joinPoint.getArgs().length > 0 && joinPoint.getArgs()[0] instanceof MultipartFile) {
+                // 打印文件名
+                requestArgs = "fileName: " + ((MultipartFile) joinPoint.getArgs()[0]).getOriginalFilename();
+            } else {
+                requestArgs = JSON.toJSONString(joinPoint.getArgs());
+            }
+            log.info("Request Args   : {}", requestArgs);
         }
     }
 

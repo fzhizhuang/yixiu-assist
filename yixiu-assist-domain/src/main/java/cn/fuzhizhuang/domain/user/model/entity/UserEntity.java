@@ -57,4 +57,17 @@ public class UserEntity {
         this.userId = uid;
         this.username = username;
     }
+
+    /**
+     * 修改用户头像
+     *
+     * @param uid     用户ID
+     * @param avatarUrl 用户头像
+     */
+    public void modifyAvatar(String uid, String avatarUrl) {
+        AssertUtil.isNotBlank(avatarUrl, "用户头像为空");
+        AssertUtil.isNotBlank(uid, "用户ID为空");
+        this.userId = uid;
+        this.avatar = avatarUrl;
+    }
 }

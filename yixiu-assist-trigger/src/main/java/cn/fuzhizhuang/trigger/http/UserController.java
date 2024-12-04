@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 用户控制器
@@ -43,4 +44,15 @@ public class UserController {
         userService.modifyUsername(uid, dto.getUsername());
         return Result.ok();
     }
+
+    @PostMapping("/uploadAvatar")
+    @Operation(summary = "上传用户头像", description = "上传用户头像")
+    public Result<String> uploadAvatar(@RequestParam("avatar") MultipartFile avatar) {
+        // 获取用户ID
+        String uid = StpUtil.getLoginIdAsString();
+        // 上传文件
+        String url = userService.uploadAvatar(uid, avatar);
+        return Result.ok(url);
+    }
+
 }

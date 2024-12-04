@@ -1,6 +1,7 @@
 package cn.fuzhizhuang.cases.service;
 
 import cn.fuzhizhuang.cases.dto.UserInfoDTO;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 用户服务
@@ -23,4 +24,12 @@ public interface UserService {
      * @param username 新昵称
      */
     void modifyUsername(String uid, String username);
+
+    /**
+     * 上传用户头像
+     *
+     * @param avatar 头像文件
+     * @return 头像地址
+     */
+    String uploadAvatar(String uid, MultipartFile avatar);
 }

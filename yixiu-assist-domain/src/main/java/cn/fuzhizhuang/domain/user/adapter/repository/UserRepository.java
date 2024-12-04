@@ -74,4 +74,11 @@ public interface UserRepository {
      */
     void modifyUsername(UserEntity userEntity);
 
+    /**
+     * 修改用户头像
+     *
+     * @param userEntity 用户实体
+     */
+    void modifyAvatar(UserEntity userEntity);
+
 }

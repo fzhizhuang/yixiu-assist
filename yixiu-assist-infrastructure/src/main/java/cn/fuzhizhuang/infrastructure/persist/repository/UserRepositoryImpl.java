@@ -103,4 +103,11 @@ public class UserRepositoryImpl implements UserRepository {
         UserPO userPO = userConverter.userEntity2Po(userEntity);
         userDao.updateUser(userPO);
     }
+
+    @Override
+    public void modifyAvatar(UserEntity userEntity) {
+        AssertUtil.notNull(userEntity, "用户实体为空");
+        UserPO userPO = userConverter.userEntity2Po(userEntity);
+        userDao.updateUser(userPO);
+    }
 }

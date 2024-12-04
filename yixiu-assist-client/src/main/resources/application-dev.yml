@@ -37,3 +37,11 @@ wechat:
   app-secret: e0e3e20d096e8685be3e7dfdba0d5794
   template-id: _vaJ0PVvl6EukdCPHLUiNK-caLExwriQFhLX-L3WG9Y
   template-url: http://127.0.0.1:8081
+
+# OSS配置
+oss:
+  minio:
+    endpoint: http://127.0.0.1:9000
+    access-key: yixiu
+    secret-key: yixiu1999
+    bucket-name: yixiu

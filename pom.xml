@@ -22,7 +22,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- 项目相关 -->
-        <spring-boot.version>3.4.0</spring-boot.version>
+        <spring-boot.version>3.3.3</spring-boot.version>
         <mysql.version>8.4.0</mysql.version>
         <mybatis-plus.version>3.5.7</mybatis-plus.version>
         <fastjson.version>2.0.53</fastjson.version>
@@ -30,10 +30,11 @@
         <rocketmq.version>2.3.1</rocketmq.version>
         <mapstruct.version>1.6.2</mapstruct.version>
         <hutool.version>5.8.32</hutool.version>
-        <knife4j.version>4.5.0</knife4j.version>
+        <knife4j.version>4.4.0</knife4j.version>
         <common-lang3.version>3.17.0</common-lang3.version>
         <sa-token.version>1.39.0</sa-token.version>
         <xstream.version>1.4.20</xstream.version>
+        <minio.version>8.5.9</minio.version>
     </properties>
 
     <dependencyManagement>
@@ -127,6 +128,12 @@
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
                 <version>${xstream.version}</version>
+            </dependency>
+            <!-- minio -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
 
             <!-- 工程模块 -->

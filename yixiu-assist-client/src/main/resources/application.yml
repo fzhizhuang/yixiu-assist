@@ -1,6 +1,6 @@
 # 服务端口
 server:
-  port: 8081
+  port: 8082
 spring:
   # 应用名称
   application:
@@ -28,6 +28,14 @@ spring:
     username: ${mail.username}
     password: ${mail.password}
     default-encoding: UTF-8
+  # 文件上传配置
+  servlet:
+    multipart:
+      # 单个文件最大大小
+      max-file-size: 50MB
+      # 所有上传文件最大大小
+      max-request-size: 50MB
+
 # Redis配置
 redisson:
   enabled: true
@@ -59,18 +67,16 @@ wx:
   app-secret: ${wechat.app-secret}
   template-id: ${wechat.template-id}
   template-url: ${wechat.template-url}
-# MybatisPlus配置
-mybatis-plus:
-  # 配置mapper xml文件路径
-  mapper-locations: classpath:/mapper/*.xml
-  # 配置自增ID
-  global-config:
-    db-config:
-      id-type: auto
-    # 关闭banner
-    banner: false
-  configuration:
-    # 开启驼峰命名
-    map-underscore-to-camel-case: true
-    # 开启日志打印
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# sa-token配置
+sa-token:
+  token-name: Authorization
+  timeout: 2592000
+  token-prefix: Bearer
+  jwt-secret-key: yixiu
+# OSS配置
+oss:
+  enabled: true
+  endpoint: ${oss.minio.endpoint}
+  access-key: ${oss.minio.access-key}
+  secret-key: ${oss.minio.secret-key}
+  bucket-name: ${oss.minio.bucket-name}

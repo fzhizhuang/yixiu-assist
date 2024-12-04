@@ -6,8 +6,10 @@ import cn.fuzhizhuang.domain.user.model.entity.AccountEntity;
 import cn.fuzhizhuang.domain.user.model.entity.UserEntity;
 import cn.fuzhizhuang.domain.user.service.user.UserDomainService;
 import cn.fuzhizhuang.types.utils.AssertUtil;
+import cn.fuzhizhuang.types.utils.OssUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -21,6 +23,7 @@ import java.util.concurrent.CompletableFuture;
 public class UserServiceImpl implements UserService {
 
     private final UserDomainService userDomainService;
+    private final OssUtil ossUtil;
 
     @Override
     public UserInfoDTO getUserInfo(String userId) {
@@ -60,5 +63,17 @@ public class UserServiceImpl implements UserService {
         userDomainService.modifyUsername(uid, username);
         // 更新用户缓存信息
         userDomainService.updateUserCache(uid);
+    }
+
+    @Override
+    public String uploadAvatar(String uid, MultipartFile avatar) {
+        AssertUtil.notNull(avatar, "上传的头像为空");
+        // 上传头像
+        String avatarUrl = ossUtil.uploadFile("avatar", avatar);
+        // 更新用户头像
+        userDomainService.modifyAvatar(uid, avatarUrl);
+        // 更新用户缓存信息
+        userDomainService.updateUserCache(uid);
+        return avatarUrl;
     }
 }
