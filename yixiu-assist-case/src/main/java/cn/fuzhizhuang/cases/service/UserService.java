@@ -1,6 +1,9 @@
 package cn.fuzhizhuang.cases.service;
 
+import cn.fuzhizhuang.cases.dto.ModifyEmailDTO;
+import cn.fuzhizhuang.cases.dto.SetPasswordDTO;
 import cn.fuzhizhuang.cases.dto.UserInfoDTO;
+import jakarta.validation.Valid;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -32,4 +35,18 @@ public interface UserService {
      * @return 头像地址
      */
     String uploadAvatar(String uid, MultipartFile avatar);
+
+    /**
+     * 设置密码
+     *
+     * @param dto 设置密码参数
+     */
+    void setPassword(String uid, @Valid SetPasswordDTO dto);
+
+    /**
+     * 修改邮箱
+     *
+     * @param dto 修改邮箱参数
+     */
+    void modifyEmail(String uid, @Valid ModifyEmailDTO dto);
 }

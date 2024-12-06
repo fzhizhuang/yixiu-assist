@@ -1,5 +1,7 @@
 package cn.fuzhizhuang.cases.service.impl;
 
+import cn.fuzhizhuang.cases.dto.ModifyEmailDTO;
+import cn.fuzhizhuang.cases.dto.SetPasswordDTO;
 import cn.fuzhizhuang.cases.dto.UserInfoDTO;
 import cn.fuzhizhuang.cases.service.UserService;
 import cn.fuzhizhuang.domain.user.model.entity.AccountEntity;
@@ -42,6 +44,8 @@ public class UserServiceImpl implements UserService {
             userInfoDTO.setAvatar(userEntity.getAvatar());
             userInfoDTO.setEmail(userEntity.getEmail());
             userInfoDTO.setOpenid(userEntity.getOpenid());
+            userInfoDTO.setRole(userEntity.getUserRole());
+            userInfoDTO.setStatus(userEntity.getUserStatus());
             // 额度信息
             userInfoDTO.setTotal(accountEntity.getTotalBalance());
             userInfoDTO.setUsed(accountEntity.getUsedBalance());
@@ -75,5 +79,28 @@ public class UserServiceImpl implements UserService {
         // 更新用户缓存信息
         userDomainService.updateUserCache(uid);
         return avatarUrl;
+    }
+
+    @Override
+    public void setPassword(String uid, SetPasswordDTO dto) {
+        String password = dto.getPassword();
+        String confirmPassword = dto.getConfirmPassword();
+        // 判断密码是否一致
+        AssertUtil.isTrue(password.equals(confirmPassword), "两次密码不一致");
+        // 修改密码
+        userDomainService.modifyPassword(uid, password);
+    }
+
+    @Override
+    public void modifyEmail(String uid, ModifyEmailDTO dto) {
+        // 查询用户已绑定的邮箱
+        UserEntity userEntity = userDomainService.queryUserByUserId(uid);
+        String email = userEntity.getEmail();
+        if (email.equals(dto.getEmail())) return;
+        // 查询邮箱是否已绑定
+        userEntity = userDomainService.queryUserByEmail(dto.getEmail());
+        AssertUtil.isNull(userEntity, "邮箱已绑定");
+        // 修改邮箱
+        userDomainService.modifyEmail(uid, dto.getEmail(), dto.getCaptcha());
     }
 }

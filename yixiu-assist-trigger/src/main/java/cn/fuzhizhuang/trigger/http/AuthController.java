@@ -1,5 +1,6 @@
 package cn.fuzhizhuang.trigger.http;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.fuzhizhuang.cases.dto.EmailAuthDTO;
 import cn.fuzhizhuang.cases.dto.PasswordAuthDTO;
 import cn.fuzhizhuang.cases.dto.SendCaptchaDTO;
@@ -58,6 +59,14 @@ public class AuthController {
     @Operation(summary = "发送验证码")
     public Result<Void> sendCaptcha(@RequestBody @Valid SendCaptchaDTO dto) {
         authService.sendCaptcha(dto);
+        return Result.ok();
+    }
+
+    @GetMapping("/logout")
+    @Operation(summary = "退出登录")
+    public Result<Void> logout() {
+        String userId = StpUtil.getLoginIdAsString();
+        StpUtil.logout(userId);
         return Result.ok();
     }
 }

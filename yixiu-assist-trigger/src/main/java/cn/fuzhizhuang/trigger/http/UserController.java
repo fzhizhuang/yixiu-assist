@@ -1,7 +1,9 @@
 package cn.fuzhizhuang.trigger.http;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.fuzhizhuang.cases.dto.ModifyEmailDTO;
 import cn.fuzhizhuang.cases.dto.ModifyUserNameDTO;
+import cn.fuzhizhuang.cases.dto.SetPasswordDTO;
 import cn.fuzhizhuang.cases.dto.UserInfoDTO;
 import cn.fuzhizhuang.cases.service.UserService;
 import cn.fuzhizhuang.types.base.Result;
@@ -53,6 +55,26 @@ public class UserController {
         // 上传文件
         String url = userService.uploadAvatar(uid, avatar);
         return Result.ok(url);
+    }
+
+    @PostMapping("/setPassword")
+    @Operation(summary = "设置密码", description = "设置密码")
+    public Result<Void> setPassword(@RequestBody @Valid SetPasswordDTO dto) {
+        // 获取用户ID
+        String uid = StpUtil.getLoginIdAsString();
+        // 设置密码
+        userService.setPassword(uid, dto);
+        return Result.ok();
+    }
+
+    @PostMapping("/modifyEmail")
+    @Operation(summary = "修改邮箱", description = "修改邮箱")
+    public Result<Void> modifyEmail(@RequestBody @Valid ModifyEmailDTO dto) {
+        // 获取用户ID
+        String uid = StpUtil.getLoginIdAsString();
+        // 修改邮箱
+        userService.modifyEmail(uid, dto);
+        return Result.ok();
     }
 
 }

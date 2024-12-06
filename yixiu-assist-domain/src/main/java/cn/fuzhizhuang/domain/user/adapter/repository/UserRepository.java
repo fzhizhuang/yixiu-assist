@@ -81,4 +81,15 @@ public interface UserRepository {
      */
     void modifyAvatar(UserEntity userEntity);
 
+    /**
+     * 修改用户密码
+     * @param userEntity 用户实体
+     */
+    void modifyPassword(UserEntity userEntity);
+
+    /**
+     * 修改用户邮箱
+     * @param userEntity 用户实体
+     */
+    void modifyEmail(UserEntity userEntity);
 }

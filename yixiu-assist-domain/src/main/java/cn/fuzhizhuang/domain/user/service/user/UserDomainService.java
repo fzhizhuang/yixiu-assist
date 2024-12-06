@@ -45,9 +45,33 @@ public interface UserDomainService {
     /**
      * 修改用户头像
      *
-     * @param uid      用户ID
+     * @param uid       用户ID
      * @param avatarUrl 新头像地址
      */
     void modifyAvatar(String uid, String avatarUrl);
 
+    /**
+     * 修改用户密码
+     *
+     * @param uid      用户ID
+     * @param password 密码
+     */
+    void modifyPassword(String uid, String password);
+
+    /**
+     * 修改用户邮箱
+     *
+     * @param uid     用户ID
+     * @param email   邮箱
+     * @param captcha 验证码
+     */
+    void modifyEmail(String uid, String email, String captcha);
+
+    /**
+     * 根据邮箱查询用户信息
+     *
+     * @param email 邮箱
+     * @return 用户信息
+     */
+    UserEntity queryUserByEmail(String email);
 }

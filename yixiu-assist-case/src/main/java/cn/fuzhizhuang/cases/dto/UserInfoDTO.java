@@ -1,5 +1,7 @@
 package cn.fuzhizhuang.cases.dto;
 
+import cn.fuzhizhuang.domain.user.model.valobj.UserRoleVO;
+import cn.fuzhizhuang.domain.user.model.valobj.UserStatusVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -24,6 +26,10 @@ public class UserInfoDTO {
     private String email;
     @Schema(description = "微信openid")
     private String openid;
+    @Schema(description = "角色")
+    private UserRoleVO role;
+    @Schema(description = "状态")
+    private UserStatusVO status;
 
     @Schema(description = "总额度")
     private BigDecimal total;

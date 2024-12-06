@@ -1,5 +1,6 @@
 package cn.fuzhizhuang.domain.user.model.entity;
 
+import cn.dev33.satoken.secure.BCrypt;
 import cn.fuzhizhuang.domain.user.model.valobj.UserRoleVO;
 import cn.fuzhizhuang.domain.user.model.valobj.UserStatusVO;
 import cn.fuzhizhuang.types.utils.AssertUtil;
@@ -61,7 +62,7 @@ public class UserEntity {
     /**
      * 修改用户头像
      *
-     * @param uid     用户ID
+     * @param uid       用户ID
      * @param avatarUrl 用户头像
      */
     public void modifyAvatar(String uid, String avatarUrl) {
@@ -69,5 +70,32 @@ public class UserEntity {
         AssertUtil.isNotBlank(uid, "用户ID为空");
         this.userId = uid;
         this.avatar = avatarUrl;
+    }
+
+    /**
+     * 修改用户密码
+     *
+     * @param uid      用户ID
+     * @param password 密码
+     */
+    public void modifyPassword(String uid, String password) {
+        AssertUtil.isNotBlank(password, "密码为空");
+        AssertUtil.isNotBlank(uid, "用户ID为空");
+        // 加密密码
+        this.password = BCrypt.hashpw(password);
+        this.userId = uid;
+    }
+
+    /**
+     * 修改用户邮箱
+     *
+     * @param uid      用户ID
+     * @param email    邮箱
+     */
+    public void modifyEmail(String uid, String email) {
+        AssertUtil.isNotBlank(email, "邮箱为空");
+        AssertUtil.isNotBlank(uid, "用户ID为空");
+        this.email = email;
+        this.userId = uid;
     }
 }

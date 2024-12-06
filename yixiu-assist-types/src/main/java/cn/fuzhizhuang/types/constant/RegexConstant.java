@@ -8,7 +8,7 @@ package cn.fuzhizhuang.types.constant;
 public class RegexConstant {
 
     // 密码正则，密码必须包含大小写字母和数字，且长度在8-16之间
-    public static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[^]{8,16}$";
+    public static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,16}$";
     // 密码正则提示
     public static final String PASSWORD_REGEX_TIP = "密码必须包含大小写字母和数字，且长度在8-16之间";
 
